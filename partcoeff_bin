@@ -1,0 +1,11 @@
+% one output - participation coefficient 
+fh = fopen('schaefer_fz_partipation_coefficient_bin010.csv','w');
+files = dir('*_schaefer.netcc')
+for f = files' 
+    x = importdata(f.name);
+    binary_matrix = get_binary_matrix(x,0.10);
+    M = community_louvain(binary_matrix); 
+    output = participation_coef(binary_matrix, M, 0); 
+    str_to_print = strcat(f.name,',',join(string(output),','),'\n');
+    fprintf(fh,str_to_print);
+end 
