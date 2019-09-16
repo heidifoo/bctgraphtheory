@@ -1,0 +1,10 @@
+fh = fopen('schaefer_fz_clustering_coefficient_bin010.csv','w');
+files = dir('*_schaefer.netcc')
+for f = files' 
+    x = importdata(f.name);
+    binary_matrix = get_binary_matrix(x,0.10);
+    output = clustering_coef_bu(binary_matrix); 
+    str_to_print = strcat(f.name,',',join(string(output),','),'\n');
+    fprintf(fh,str_to_print);
+end     
+    
