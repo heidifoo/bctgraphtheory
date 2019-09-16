@@ -1,0 +1,14 @@
+% two outputs - lambda, global efficiency
+lambda = fopen('schaefer_fz_characteristic_path_lambda_bin010.csv','w');
+eff = fopen('schaefer_fz_characteristic_path_global_efficiency_bin010.csv','w');
+files = dir('*_schaefer.netcc')
+for f = files' 
+    x = importdata(f.name);
+    binary_matrix = get_binary_matrix(x,0.10);
+    dist = distance_bin(binary_matrix); 
+    [lambda_out,eff_out] = charpath(dist,0,0); 
+    lambda_to_print = strcat(f.name,',',join(string(lambda_out),','),'\n');
+    eff_to_print = strcat(f.name,',',join(string(eff_out),','),'\n');
+    fprintf(lambda,lambda_to_print);
+    fprintf(eff,eff_to_print);
+end 
