@@ -1,0 +1,10 @@
+fh = fopen('schaefer_fz_module_degree.csv','w');
+files = dir('*_schaefer.netcc')
+for f = files'
+    x = importdata(f.name);
+    weight_matrix = get_weight_matrix(x);
+    M = community_louvain(weight_matrix);
+    output = module_degree_zscore(weight_matrix, M, 0);
+    str_to_print = strcat(f.name,',',join(string(output),','),'\n');
+    fprintf(fh,str_to_print);
+end 
