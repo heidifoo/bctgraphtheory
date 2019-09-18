@@ -1,0 +1,9 @@
+eff = fopen('schaefer_fz_eloc_weighted.csv','w');
+files = dir('*_schaefer.netcc')
+for f = files'
+    x = importdata(f.name);
+    weight_matrix = get_weight_matrix(x);
+    eloc_out = efficiency_wei(weight_matrix,2);
+    eloc_to_print = strcat(f.name,',',join(string(eloc_out),','),'\n');
+    fprintf(eff,eloc_to_print);
+end
