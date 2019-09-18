@@ -1,0 +1,10 @@
+fh = fopen('schaefer_fz_clustering_coefficient.csv','w');
+files = dir('*_schaefer.netcc')
+for f = files'
+    x = importdata(f.name);
+    weight_matrix = get_weight_matrix(x);
+    WMC = weight_conversion(weight_matrix,'normalize');
+    output = clustering_coef_wu(WMC);
+    str_to_print = strcat(f.name,',',join(string(output),','),'\n');
+    fprintf(fh,str_to_print);
+end
