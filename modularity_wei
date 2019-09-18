@@ -1,0 +1,9 @@
+fh = fopen('schaefer_fz_modularity.csv','w');
+files = dir('*_schaefer.netcc')
+for f = files'
+    x = importdata(f.name);
+    weight_matrix = get_weight_matrix(x);
+    output = modularity_und(weight_matrix);
+    str_to_print = strcat(f.name,',',join(string(output),','),'\n');
+    fprintf(fh,str_to_print);
+end
