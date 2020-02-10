@@ -1,3 +1,4 @@
+% This is a test commit
 fh = fopen('schaefer_fz_modularity.csv','w');
 files = dir('*_schaefer.netcc')
 for f = files'
